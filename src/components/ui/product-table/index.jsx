@@ -8,10 +8,10 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { category } from "@service";
+import { worker } from "@service";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import { AddCategory } from "@modal";
+import { AddWorkers } from "@modal";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -33,13 +33,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export default function CustomizedTables({ data }) {
-  const [name,setName]=useState("")
-  const [id,setId]=useState("")
+  console.log(data);
+  const [edit, setEdit] = useState({});
   const [modal, setModal] = useState(false);
 
   const daletItem = async (id) => {
     try {
-      const response = await category.delet(id);
+      const response = await worker.delet(id);
       if (response.status === 200) {
         window.location.reload();
       }
@@ -48,29 +48,30 @@ export default function CustomizedTables({ data }) {
     }
   };
 
-
-  const edit =(name,id)=>{
-    setModal(true)
-    setName(name)
-    setId(id)
-  }
+  const editItem = (item) => {
+    setModal(true);
+    setEdit(item)
+  };
 
   return (
     <>
-      <AddCategory
+      <AddWorkers
         modal={modal}
         toggle={() => {
           setModal(false);
         }}
-        name={name}
-        id={id}
+        item={edit}
       />
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
           <TableHead>
             <TableRow>
               <StyledTableCell align="center">T/R</StyledTableCell>
-              <StyledTableCell align="center"> Category Name</StyledTableCell>
+              <StyledTableCell align="center">Product Name</StyledTableCell>
+              <StyledTableCell align="center"> Color</StyledTableCell>
+              <StyledTableCell align="center"> Size</StyledTableCell>
+              <StyledTableCell align="center"> Count</StyledTableCell>
+              <StyledTableCell align="center">Cost</StyledTableCell>
               <StyledTableCell align="center"> Action</StyledTableCell>
             </TableRow>
           </TableHead>
@@ -79,19 +80,34 @@ export default function CustomizedTables({ data }) {
               <StyledTableRow key={index}>
                 <StyledTableCell align="center">{index + 1}</StyledTableCell>
                 <StyledTableCell align="center">
-                  {item.category_name}
+                  {item.product_name}
                 </StyledTableCell>
+                <StyledTableCell align="center">
+                  {item.color}
+                </StyledTableCell>
+                <StyledTableCell align="center">
+                  {item.size}
+                </StyledTableCell>
+                <StyledTableCell align="center">
+                  {item.count}
+                </StyledTableCell>
+                <StyledTableCell align="center">
+                  {item.cost}
+                </StyledTableCell>
+                
                 <StyledTableCell align="center">
                   <div>
                     <EditIcon
-                      onClick={()=>{edit(item.category_name, item.category_id)}}
+                      onClick={() => {
+                        editItem(item);
+                      }}
                       className="cursor-pointer"
                     />
 
                     <DeleteIcon
                       className="cursor-pointer"
                       onClick={() => {
-                        daletItem(item.category_id);
+                        daletItem(item.id);
                       }}
                     />
                   </div>

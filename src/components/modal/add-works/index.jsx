@@ -47,7 +47,6 @@ export default function TransitionsModal({ modal, toggle, item }) {
   const handleSubmit = async (values) => {
     const phone_number = values.phone_number.replace(/\D/g, "");
     const payload = { ...values, phone_number: `${phone_number}` };
-    console.log(payload);
     if (item) {
       const edit = { ...values, phone_number: `${phone_number}`, id: item.id };
       try {

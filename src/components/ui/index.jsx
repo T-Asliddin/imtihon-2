@@ -1,4 +1,5 @@
 import  Drawer  from "./drawer";
-import CategoryTable from "./category-table"
 import WorkersTable from "./workers-table";
-export {Drawer ,CategoryTable ,WorkersTable }
+import ProductTable from "./product-table"
+import CategoryTable from "./category-table";
+export {Drawer ,CategoryTable ,WorkersTable  ,ProductTable}
