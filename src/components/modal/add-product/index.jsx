@@ -9,10 +9,10 @@ import Typography from "@mui/material/Typography";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import Notification from "@notification";
 import { ToastContainer } from "react-toastify";
-import { workerValidationSchema } from "@validation";
+import { productValidationSchema } from "@validation";
 import TextField from "@mui/material/TextField";
 import { useState, useEffect } from "react";
-import { category ,product } from "@service";
+import { category, product } from "@service";
 
 const style = {
   position: "absolute",
@@ -26,48 +26,72 @@ const style = {
   p: 4,
 };
 
-export default function TransitionsModal({ modal, toggle }) {
+export default function TransitionsModal({ modal, toggle, item }) {
   const [data, setData] = useState({});
+  console.log(item);
   const options = [
-    { value: "o'zbekiston", label: "O'zbekiston" },
+    { value: "ozbekiston", label: "O'zbekiston" },
     { value: "turkiya", label: "Turkiya" },
     { value: "china", label: "China" },
   ];
-  const [selectedCountry, setSelectedCountry] = useState("");
   const initialValues = {
-    age_max: "",
-    age_min: "",
-    category_id: "",
-    color: "",
-    cost: "",
-    count: "",
-    description: "",
-    for_gender: "",
-    made_in: "",
-    product_name: "",
-    size: "",
+    age_max: item?.age_max ? item.age_max : "",
+    age_min: item?.age_min ? item.age_min : "",
+    category_id: item?.category_id ? item.category_id : "",
+    color: item?.color ? item.color : "",
+    cost: item?.cost ? item.cost : "",
+    count: item?.count ? item.count : "",
+    description: item?.description ? item.description : "",
+    for_gender: item?.for_gender ? item.for_gender : "",
+    made_in: item?.made_in ? item.made_in : "",
+    product_name: item?.product_name ? item.product_name : "",
+    size: item?.size ? item.size : "",
+    discount: item?.discount ?item.discount : "",
   };
   console.log(initialValues.made_in);
   const handleSubmit = async (values) => {
-    console.log(values);
+   if (item) {
     let arr1 = [values.color];
     let color = arr1[0].split(" ");
     let arr2 = [values.size];
     let size = arr2[0].split(" ");
-    let madi_in = values.made_in;
+    let payload = {
+      ...values,
+      size,
+      color,
+      product_id:item.product_id
+    };
+    
+    try{
+      const response =await product.put(payload)
+      console.log(response);
+      if (response.status === 200) {
+        toggle();
+         window.location.reload();
+      }
+      console.log(response);
+    }catch(error){
+
+    }
+   }else{
+    let arr1 = [values.color];
+    let color = arr1[0].split(" ");
+    let arr2 = [values.size];
+    let size = arr2[0].split(" ");
     let payload = {
       ...values,
       size,
       color,
     };
     try {
-          const response = await product.create(payload);
-          if (response.status === 201) {
-            window.location.reload();
-          }
-        } catch (error) {
-          Notification({ title: "Nimadir xato", type: "error " });
-        }
+      const response = await product.create(payload);
+      if (response.status === 201) {
+        window.location.reload();
+      }
+    } catch (error) {
+      Notification({ title: "Nimadir xato", type: "error " });
+    }
+   }
   };
 
   const getdata = async () => {
@@ -109,7 +133,7 @@ export default function TransitionsModal({ modal, toggle }) {
               <Formik
                 onSubmit={handleSubmit}
                 initialValues={initialValues}
-                // validationSchema={workerValidationSchema}
+                 validationSchema={productValidationSchema}
               >
                 {({ isSubmitting }) => (
                   <Form>
@@ -263,7 +287,7 @@ export default function TransitionsModal({ modal, toggle }) {
                             <label>
                               <Field
                                 type="radio"
-                                name="genfor_genderder"
+                                name="for_gender"
                                 value="male"
                               />
                               Male

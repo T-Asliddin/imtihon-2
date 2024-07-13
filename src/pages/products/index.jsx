@@ -32,7 +32,8 @@ const Index = () => {
   }, [params]);
   return (
     <>
-      <div>
+      <div className="flex flex-col gap-5 mb-4">
+      <div className="flex justify-end">
         <AddProduct modal={modal} toggle={() => setModal(false)} />
         <Button
           onClick={() => {
@@ -45,6 +46,7 @@ const Index = () => {
       </div>
       <div>
         <ProductTable data={data} />
+      </div>
       </div>
       <Pagination count={count} page={params.page} onChange={handleChange} />
     </>

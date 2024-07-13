@@ -11,7 +11,7 @@ import Paper from "@mui/material/Paper";
 import { worker } from "@service";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import { AddWorkers } from "@modal";
+import { AddProduct } from "@modal";
 import { product } from "@service";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -56,7 +56,7 @@ export default function CustomizedTables({ data }) {
 
   return (
     <>
-      <AddWorkers
+      <AddProduct
         modal={modal}
         toggle={() => {
           setModal(false);

@@ -41,7 +41,7 @@ const Index = () => {
     <>
       <AddCategory modal={modal} toggle={() => setModal(false)} />
       
-        <div className="flex flex-col gap-6 ">
+        <div className="flex flex-col gap-6 mb-4 ">
        <div className="flex justify-end mr-8">
        <Button
             variant="contained"
