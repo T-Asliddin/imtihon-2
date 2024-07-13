@@ -12,6 +12,7 @@ import { worker } from "@service";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { AddWorkers } from "@modal";
+import { product } from "@service";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -33,13 +34,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export default function CustomizedTables({ data }) {
-  console.log(data);
   const [edit, setEdit] = useState({});
+  console.log(data);
   const [modal, setModal] = useState(false);
 
   const daletItem = async (id) => {
     try {
-      const response = await worker.delet(id);
+      const response = await product.delet(id);
       if (response.status === 200) {
         window.location.reload();
       }
@@ -107,7 +108,7 @@ export default function CustomizedTables({ data }) {
                     <DeleteIcon
                       className="cursor-pointer"
                       onClick={() => {
-                        daletItem(item.id);
+                        daletItem(item.product_id);
                       }}
                     />
                   </div>
