@@ -11,6 +11,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
+import { useState } from "react";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { NavLink } from "react-router-dom";
@@ -20,9 +21,14 @@ const drawerWidth = 240;
 
 export default function ResponsiveDrawer(props) {
   const { window } = props;
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [isClosing, setIsClosing] = React.useState(false);
-const {pathname}=useLocation()
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
+  const [pagename,setPagename]=useState("")
+
+  const {pathname}=useLocation()
+
+
+
   const handleDrawerClose = () => {
     setIsClosing(true);
     setMobileOpen(false);
@@ -50,7 +56,7 @@ const {pathname}=useLocation()
               <ListItemIcon>
                 {item.icon}
               </ListItemIcon>
-              <ListItemText primary={item.content} />
+            <ListItemText  primary={item.content} />
             </ListItemButton>
           </ListItem>
           </NavLink>
@@ -83,9 +89,19 @@ const {pathname}=useLocation()
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            Responsive drawer
+          {
+            routes.map(item=>{
+              if (item.path===pathname) {
+                return(
+                  <Typography variant="h6" noWrap component="div">
+            {item.content}
           </Typography>
+                )
+              }
+            }
+              
+)
+          }
         </Toolbar>
       </AppBar>
       <Box
