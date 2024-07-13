@@ -8,9 +8,10 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { worker } from "@service";
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import { NavLink } from "react-router-dom";
 import { AddProduct } from "@modal";
 import { product } from "@service";
 
@@ -84,10 +85,10 @@ export default function CustomizedTables({ data }) {
                   {item.product_name}
                 </StyledTableCell>
                 <StyledTableCell align="center">
-                  {item.color}
+                  {item.color.join(" ")}
                 </StyledTableCell>
                 <StyledTableCell align="center">
-                  {item.size}
+                  {item.size.join(" ")}
                 </StyledTableCell>
                 <StyledTableCell align="center">
                   {item.count}
@@ -111,6 +112,7 @@ export default function CustomizedTables({ data }) {
                         daletItem(item.product_id);
                       }}
                     />
+                 
                   </div>
                 </StyledTableCell>
               </StyledTableRow>

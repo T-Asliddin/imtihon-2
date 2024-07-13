@@ -38,60 +38,59 @@ export default function TransitionsModal({ modal, toggle, item }) {
     age_max: item?.age_max ? item.age_max : "",
     age_min: item?.age_min ? item.age_min : "",
     category_id: item?.category_id ? item.category_id : "",
-    color: item?.color ? item.color : "",
+    color: item?.color ? item.color.join(" ") : "",
     cost: item?.cost ? item.cost : "",
     count: item?.count ? item.count : "",
     description: item?.description ? item.description : "",
     for_gender: item?.for_gender ? item.for_gender : "",
     made_in: item?.made_in ? item.made_in : "",
     product_name: item?.product_name ? item.product_name : "",
-    size: item?.size ? item.size : "",
-    discount: item?.discount ?item.discount : "",
+    size: item?.size ? item.size.join(" ") : "",
+    discount: item?.discount ? item.discount : "",
   };
-  console.log(initialValues.made_in);
-  const handleSubmit = async (values) => {
-   if (item) {
-    let arr1 = [values.color];
-    let color = arr1[0].split(" ");
-    let arr2 = [values.size];
-    let size = arr2[0].split(" ");
-    let payload = {
-      ...values,
-      size,
-      color,
-      product_id:item.product_id
-    };
-    
-    try{
-      const response =await product.put(payload)
-      console.log(response);
-      if (response.status === 200) {
-        toggle();
-         window.location.reload();
-      }
-      console.log(response);
-    }catch(error){
 
-    }
-   }else{
-    let arr1 = [values.color];
-    let color = arr1[0].split(" ");
-    let arr2 = [values.size];
-    let size = arr2[0].split(" ");
-    let payload = {
-      ...values,
-      size,
-      color,
-    };
-    try {
-      const response = await product.create(payload);
-      if (response.status === 201) {
-        window.location.reload();
+  const handleSubmit = async (values) => {
+    if (item) {
+      let arr1 = [values.color];
+      let color = arr1[0].split(" ");
+      let arr2 = [values.size];
+      let size = arr2[0].split(" ");
+      let payload = {
+        ...values,
+        size,
+        color,
+        product_id: item.product_id,
+      };
+
+      try {
+        const response = await product.put(payload);
+        console.log(response);
+        if (response.status === 200) {
+          toggle();
+          window.location.reload();
+        }
+        console.log(response);
+      } catch (error) {}
+    } else {
+      let arr1 = [values.color];
+      let color = arr1[0].split(" ");
+      let arr2 = [values.size];
+      let size = arr2[0].split(" ");
+      let payload = {
+        ...values,
+        size,
+        color,
+      };
+      try {
+        const response = await product.create(payload);
+        console.log(response);
+        if (response.status === 201) {
+          window.location.reload();
+        }
+      } catch (error) {
+        Notification({ title: "Nimadir xato", type: "error " });
       }
-    } catch (error) {
-      Notification({ title: "Nimadir xato", type: "error " });
     }
-   }
   };
 
   const getdata = async () => {
@@ -133,7 +132,7 @@ export default function TransitionsModal({ modal, toggle, item }) {
               <Formik
                 onSubmit={handleSubmit}
                 initialValues={initialValues}
-                 validationSchema={productValidationSchema}
+                validationSchema={productValidationSchema}
               >
                 {({ isSubmitting }) => (
                   <Form>
