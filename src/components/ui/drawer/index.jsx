@@ -50,7 +50,7 @@ export default function ResponsiveDrawer(props) {
       <Divider />
       <List>
         {routes.map((item, index) => (
-          <NavLink key={index} to={item.path} className={item.path === pathname ? "block bg-blue-500 text-white" : ""}>
+          <NavLink key={index} to={item.path} className={item.path === pathname ?  "block bg-blue-500 text-white" : ""}>
             <ListItem  disablePadding>
             <ListItemButton>
               <ListItemIcon>

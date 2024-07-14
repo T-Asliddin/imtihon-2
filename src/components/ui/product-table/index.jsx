@@ -92,7 +92,16 @@ export default function CustomizedTables({ data }) {
                 <StyledTableCell align="center">{item.cost}</StyledTableCell>
 
                 <StyledTableCell align="center">
-                  <div>
+                  <div >
+                    <NavLink to={`singl-page/${item.product_id}`}>
+                      <RemoveRedEyeIcon />
+                    </NavLink>
+                    <DeleteIcon
+                      className="cursor-pointer"
+                      onClick={() => {
+                        daletItem(item.product_id);
+                      }}
+                    />
                     <EditIcon
                       onClick={() => {
                         editItem(item);
@@ -100,16 +109,9 @@ export default function CustomizedTables({ data }) {
                       className="cursor-pointer"
                     />
 
-                    <DeleteIcon
-                      className="cursor-pointer"
-                      onClick={() => {
-                        daletItem(item.product_id);
-                      }}
-                    />
-                    <NavLink to={`singl-page/${item.product_id}`}>
-                      <RemoveRedEyeIcon />
-                    </NavLink>
-                    {/* <RemoveRedEyeIcon /> */}
+                    
+                    
+              
                   </div>
                 </StyledTableCell>
               </StyledTableRow>

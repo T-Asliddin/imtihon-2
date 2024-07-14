@@ -21,9 +21,6 @@ const index = () => {
     getData();
   }, []);
 
-  data?.image_url?.map((i) => {
-    console.log(i);
-  });
   return (
     <>
       <div>
