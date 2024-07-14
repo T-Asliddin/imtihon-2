@@ -28,7 +28,6 @@ const style = {
 
 export default function TransitionsModal({ modal, toggle, item }) {
   const [data, setData] = useState({});
-  console.log(item);
   const options = [
     { value: "ozbekiston", label: "O'zbekiston" },
     { value: "turkiya", label: "Turkiya" },
@@ -70,7 +69,9 @@ export default function TransitionsModal({ modal, toggle, item }) {
           window.location.reload();
         }
         console.log(response);
-      } catch (error) {}
+      } catch (error) {
+        Notification({ title: "Nimadir xato", type: "error " });
+      }
     } else {
       let arr1 = [values.color];
       let color = arr1[0].split(" ");

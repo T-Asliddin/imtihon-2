@@ -8,7 +8,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { NavLink } from "react-router-dom";
@@ -36,7 +36,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 export default function CustomizedTables({ data }) {
   const [edit, setEdit] = useState({});
-  console.log(data);
   const [modal, setModal] = useState(false);
 
   const daletItem = async (id) => {
@@ -46,13 +45,12 @@ export default function CustomizedTables({ data }) {
         window.location.reload();
       }
     } catch (error) {
-      console.log(error);
     }
   };
 
   const editItem = (item) => {
     setModal(true);
-    setEdit(item)
+    setEdit(item);
   };
 
   return (
@@ -90,13 +88,9 @@ export default function CustomizedTables({ data }) {
                 <StyledTableCell align="center">
                   {item.size.join(" ")}
                 </StyledTableCell>
-                <StyledTableCell align="center">
-                  {item.count}
-                </StyledTableCell>
-                <StyledTableCell align="center">
-                  {item.cost}
-                </StyledTableCell>
-                
+                <StyledTableCell align="center">{item.count}</StyledTableCell>
+                <StyledTableCell align="center">{item.cost}</StyledTableCell>
+
                 <StyledTableCell align="center">
                   <div>
                     <EditIcon
@@ -112,7 +106,10 @@ export default function CustomizedTables({ data }) {
                         daletItem(item.product_id);
                       }}
                     />
-                 
+                    <NavLink to={`singl-page/${item.product_id}`}>
+                      <RemoveRedEyeIcon />
+                    </NavLink>
+                    {/* <RemoveRedEyeIcon /> */}
                   </div>
                 </StyledTableCell>
               </StyledTableRow>
