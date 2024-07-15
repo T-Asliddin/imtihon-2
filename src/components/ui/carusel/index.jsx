@@ -12,6 +12,7 @@ import { autoPlay } from "react-swipeable-views-utils";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { product } from "@service";
+import { Upload } from "@ui";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -49,9 +50,12 @@ function SwipeableTextMobileStepper() {
   }, []);
   const images = data?.image_url || [];
   const maxSteps = images?.length;
-console.log(images);
   if (maxSteps == 0) {
-    return <Typography>No image</Typography>;
+    return (
+      <div className="w-96">
+         <Typography>No image</Typography>;
+      </div>
+    )
   }
   return (
     <>

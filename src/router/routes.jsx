@@ -5,6 +5,7 @@ const routes= [
     {path:"/drawer" , content:"Category"  ,icon:<HomeOutlinedIcon/>},
     {path:"/drawer/products" , content:"Products"  ,icon:<CheckroomIcon/>},
     {path:"/drawer/workers" , content:"Workers"  ,icon:<Person4OutlinedIcon/>},
+
 ]
 
 export default routes

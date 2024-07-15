@@ -15,7 +15,7 @@ import { useState } from "react";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { NavLink } from "react-router-dom";
-import { Outlet,useLocation } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import routes from "../../../router/routes.jsx";
 const drawerWidth = 240;
 
@@ -23,11 +23,7 @@ export default function ResponsiveDrawer(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
-  const [pagename,setPagename]=useState("")
-
-  const {pathname}=useLocation()
-
-
+  const { pathname } = useLocation();
 
   const handleDrawerClose = () => {
     setIsClosing(true);
@@ -50,15 +46,19 @@ export default function ResponsiveDrawer(props) {
       <Divider />
       <List>
         {routes.map((item, index) => (
-          <NavLink key={index} to={item.path} className={item.path === pathname ?  "block bg-blue-500 text-white" : ""}>
-            <ListItem  disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {item.icon}
-              </ListItemIcon>
-            <ListItemText  primary={item.content} />
-            </ListItemButton>
-          </ListItem>
+          <NavLink
+            key={index}
+            to={item.path}
+            className={
+              item.path === pathname ? "block bg-blue-500 text-white" : ""
+            }
+          >
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon>{item.icon}</ListItemIcon>
+                <ListItemText primary={item.content} />
+              </ListItemButton>
+            </ListItem>
           </NavLink>
         ))}
       </List>
@@ -89,19 +89,15 @@ export default function ResponsiveDrawer(props) {
           >
             <MenuIcon />
           </IconButton>
-          {
-            routes.map(item=>{
-              if (item.path===pathname) {
-                return(
-                  <Typography variant="h6" noWrap component="div">
-            {item.content}
-          </Typography>
-                )
-              }
+          {routes.map((item) => {
+            if (item.path == pathname) {
+              return (
+                <Typography variant="h6" noWrap component="div">
+                  {item.content}
+                </Typography>
+              );
             }
-              
-)
-          }
+          })}
         </Toolbar>
       </AppBar>
       <Box
@@ -116,7 +112,7 @@ export default function ResponsiveDrawer(props) {
           onTransitionEnd={handleDrawerTransitionEnd}
           onClose={handleDrawerClose}
           ModalProps={{
-            keepMounted: true, 
+            keepMounted: true,
           }}
           sx={{
             display: { xs: "block", sm: "none" },
@@ -150,13 +146,11 @@ export default function ResponsiveDrawer(props) {
           width: { sm: `calc(100% - ${drawerWidth}px)` },
         }}
       >
-               <Toolbar />
-        
-        <Outlet/>
+        <Toolbar />
 
-        <Typography paragraph>
- 
-        </Typography>
+        <Outlet />
+
+        <Typography paragraph></Typography>
         <Typography paragraph>
           {/* Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
           eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim
